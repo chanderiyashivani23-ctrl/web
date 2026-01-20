@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  height:100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+  background-size: 300% 300%;
+  animation: bgMove 12s ease infinite;
+  color:#fff;
+  overflow:hidden;
+}
+
+@keyframes bgMove{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+.page{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 1.2s ease;
+}
+
+.page.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.card{
+  text-align:center;
+  padding:45px;
+  max-width:560px;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(18px);
+  border-radius:28px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.25);
+  animation:fadeUp 1.6s ease;
+}
+
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(40px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+h1{
+  font-size:36px;
+  font-weight:600;
+  margin-bottom:14px;
+}
+
+p{
+  font-size:15.8px;
+  line-height:2;
+  opacity:0.95;
+}
+
+.photo{
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid rgba(255,255,255,0.7);
+  margin-bottom:18px;
+  animation:photoGlow 3s infinite;
+}
+
+@keyframes photoGlow{
+  0%{box-shadow:0 0 10px rgba(255,255,255,0.5);}
+  50%{box-shadow:0 0 30px rgba(255,255,255,0.9);}
+  100%{box-shadow:0 0 10px rgba(255,255,255,0.5);}
+}
+
+.emoji{
+  font-size:32px;
+  margin-bottom:14px;
+  animation:floatEmoji 3s ease-in-out infinite;
+}
+
+@keyframes floatEmoji{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-12px);}
+  100%{transform:translateY(0);}
+}
+
+.btn{
+  margin-top:32px;
+  padding:12px 42px;
+  border-radius:40px;
+  border:1px solid #fff;
+  display:inline-block;
+  cursor:pointer;
+  transition:0.4s;
+  font-size:14px;
+}
+
+.btn:hover{
+  background:#fff;
+  color:#764ba2;
+}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+  <div class="card">
+    <div class="emoji">🎂✨💫</div>
+    <h1>Happy Birthday</h1>
+    <p>
+      Some moments are meant to be felt,<br>
+      not explained.
+    </p>
+    <div class="btn" onclick="go(1)">Continue</div>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+  <div class="card">
+    <div class="emoji">🌸🌙</div>
+    <p>
+      We crossed paths, shared smiles,<br>
+      and became a part of each other’s stories.
+      <br><br>
+      Even if life moved us forward,<br>
+      the good moments still deserve respect.
+    </p>
+    <div class="btn" onclick="go(2)">Next</div>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+  <div class="card">
+    <img src="ph1.jpeg" class="photo" alt="Memory">
+    <div class="emoji">🎉💖🕊️</div>
+    <p>
+      <strong>Happy Birthday, Rajkumar.</strong>
+      <br><br>
+      You were one of the most beautiful parts of my life —<br>
+      someone who made me smile and feel happy.
+      <br><br>
+      I wish you peace, growth,<br>
+      and a life full of genuine happiness.
+    </p>
+  </div>
+</div>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="birthday.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function go(n){
+  document.getElementById("p"+n).classList.remove("active");
+
+  if(n < 3){
+    const nextPage = document.getElementById("p"+(n+1));
+    nextPage.classList.add("active");
+
+    // 🔥 AUTO PLAY MUSIC WHEN PAGE 3 OPENS
+    if(n === 2){
+      const music = document.getElementById("bgMusic");
+      music.volume = 0.4;
+      music.play();
+    }
+  }
+}
+</script>
+
+</body>
+</html>
